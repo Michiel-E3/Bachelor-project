@@ -1,4 +1,4 @@
-# sudo pip3 install adafruit-circuitpython-ads1x15
+# sudo pip3 install adafruit-circuitpython-ads1x15 --break-system-packages
 
 import time
 

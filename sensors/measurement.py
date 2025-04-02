@@ -15,7 +15,6 @@ for i in range(100):
 
     readings = read_ADC.values()
     measurements.append(readings)
-    sleep(0.01)
 
 measurements = np.array(measurements)
 
