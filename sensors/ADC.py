@@ -47,12 +47,14 @@ class READ():
                 return self.channel3.value
 
     def voltages(self):
-        readings = np.array([
-            self.channel0.voltage, 
-            self.channel1.voltage, 
-            self.channel2.voltage, 
-            self.channel3.voltage
-            ])
+        readings = np.array(
+            [
+                self.channel0.voltage, 
+                self.channel1.voltage, 
+                self.channel2.voltage, 
+                self.channel3.voltage
+            ]
+        )
         return readings
     
     def voltage(self, channel: int):
