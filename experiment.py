@@ -60,6 +60,7 @@ def dispensing(rotations, speed):
         # if step%1024 == 0:
         #     print(f"rotated: {step/4096}")
     
+    """
     while step > 0:
         for pin in range(len(motor_pins)):
             GPIO.output( motor_pins[pin], step_sequence[motor_step_counter][pin] )
@@ -67,7 +68,7 @@ def dispensing(rotations, speed):
         time.sleep(step_sleep)
         step -= 1
         # if step%1024 == 0:
-        #     print(f"rotated: {step/4096}")
+        #     print(f"rotated: {step/4096}")"""
 
     GPIO.output( in1, GPIO.LOW )
     GPIO.output( in2, GPIO.LOW )
@@ -92,13 +93,13 @@ def measuring():
         measurements.append(np.concatenate(([t], values)))
         print(f"{triggers[0]}\t{triggers[1]}\t{triggers[2]}\t{triggers[3]}")
         print(f"{values[0]}\t{values[1]}\t{values[2]}\t{values[3]}\t at t = {t}")
-
+        """
         # check for stop criterion 1
-        if len(measurements[-20:-10]) != 0:
-            past_avg = np.mean(measurements[-20:-10], axis=0)[-4:]
+        if len(measurements[-120:-60]) == 60:
+            past_avg = np.mean(measurements[-120:-60], axis=0)[-4:]
         else:
             past_avg = [32767, 32767, 32767, 32767]
-        current_avg = np.mean(measurements[-10:], axis=0)[-4:]
+        current_avg = np.mean(measurements[-60:], axis=0)[-4:]
         # print(past_avg)
         # print(current_avg)
         rel_change = (current_avg - past_avg)/past_avg
@@ -113,13 +114,15 @@ def measuring():
         for value, trigger in zip(values, triggers):
             if value >= trigger:
                 stop *= 0
-        if stop == 1:
+        if t > 480: # also stop after 8 mins
+            stop = 1
+        if stop == 1 and t > 30:
             print("trigger value reached")
             stop_threading.set()
-
+        """
         print()
         time.sleep(1)
-    
+    """
     # save height and measurements
 
     if exists("data") == False:
@@ -151,7 +154,7 @@ def measuring():
             ]
         )
         for measurement in measurements:
-            writer.writerow(measurement)
+            writer.writerow(measurement)"""
 
 
 # Define a function for user input
@@ -159,6 +162,7 @@ def wait_for_enter():
     global height
     # Prompt for sensor height
     height = input("Height of sensors in mm:")
+    print(height)
     input("Press Enter to stop the program early\n")
     stop_threading.set()
 
@@ -168,8 +172,8 @@ if __name__ == "__main__":
     read_ADC = ADC.READ()
     
     values = read_ADC.values()
-    
-    while not(all(x < 1000 for x in values)):
+    """
+    while not(all(x < 2000 for x in values)):
         time.sleep(1)
         values = read_ADC.values()
         print(values)
@@ -187,14 +191,14 @@ if __name__ == "__main__":
     baseline = np.mean(baselines, axis=0)
     triggers = np.round(baseline + 2*np.std(baselines, axis=0))
     print(np.round(baseline))
-    print(triggers)
+    print(triggers)"""
     
-    # triggers = np.array([0,0,0,0])
+    triggers = np.array([1000,1000,1000,1000])
 
     # Flag to signal when to stop reading
     stop_threading = threading.Event()
 
-    rotations = 4.2
+    rotations = 4
     speed = 1
 
     # Start dispensing thread

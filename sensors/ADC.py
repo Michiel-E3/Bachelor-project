@@ -2,11 +2,11 @@
 
 import time
 
-import sensors.adafruit_ads1x15.ads1115 as ADS
-import sensors.board as board
-import sensors.busio as busio
+import adafruit_ads1x15.ads1115 as ADS
+import board
+import busio
 import numpy as np
-from sensors.adafruit_ads1x15.analog_in import AnalogIn
+from adafruit_ads1x15.analog_in import AnalogIn
 
 
 class READ():

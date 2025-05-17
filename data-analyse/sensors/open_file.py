@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-filename = "data-1.csv"
+filename = "data-34.csv"
 open_file = open(f"data/{filename}", 'r')
 
 t = []
@@ -33,7 +33,7 @@ print(f"height = {height}")
 for avg_i, err_i in zip(avg, err):
     print(f"avg = {avg_i} +- {err_i}")
 
-endtime = 240
+endtime = 300
 
 plt.plot(t[:endtime], A0[:endtime], color="blue", label="A0")
 plt.plot(t[:endtime], A1[:endtime], color="red", label="A1")
