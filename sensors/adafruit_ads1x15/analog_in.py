@@ -1,3 +1,6 @@
+# This is some dummy code to make the code run on a laptop.
+# Dont copy this to the raspberry pi.
+
 import random
 
 
