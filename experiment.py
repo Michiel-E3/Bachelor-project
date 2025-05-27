@@ -19,7 +19,7 @@ def dispensing(rotations, speed):
     in4 = 22
 
     # careful lowering this, at some point you run into the mechanical limitation of how quick your motor can move
-    step_sleep = 0.002 / speed
+    step_sleep = 0.0015
 
     step_count = round(4096 * rotations) # 5.625*(1/64) per step, 4096 steps is 360°
 
@@ -91,8 +91,8 @@ def measuring():
         values = read_ADC.values()
         t = round(time.time()) - t_start
         measurements.append(np.concatenate(([t], values)))
-        print(f"{triggers[0]}\t{triggers[1]}\t{triggers[2]}\t{triggers[3]}")
-        print(f"{values[0]}\t{values[1]}\t{values[2]}\t{values[3]}\t at t = {t}")
+        print(f"{triggers[0]}\t{triggers[1]}\t{triggers[2]}")
+        print(f"{values[0]}\t{values[1]}\t{values[2]}\t at t = {t}")
         """
         # check for stop criterion 1
         if len(measurements[-120:-60]) == 60:
@@ -107,22 +107,26 @@ def measuring():
         # experiment is over
         if all(-0.01 < x < 0.01 for x in rel_change):
             print("equilibrium reached")
-            stop_threading.set()
+            stop_threading.set()"""
 
         # check for stop criterion 2
         stop = 1
-        for value, trigger in zip(values, triggers):
+        for value, trigger in zip(values[0:3], triggers[0:3]):
             if value >= trigger:
                 stop *= 0
-        if t > 480: # also stop after 8 mins
+        if t > 180: # also stop after 5 mins
             stop = 1
-        if stop == 1 and t > 30:
+        if stop == 1 and t > 60:
             print("trigger value reached")
             stop_threading.set()
-        """
-        print()
+        
+        try:
+            height
+            print("*")
+        except:
+            print("x")
         time.sleep(1)
-    """
+    
     # save height and measurements
 
     if exists("data") == False:
@@ -149,12 +153,11 @@ def measuring():
                 "time",
                 "value of sensor0",
                 "value of sensor1",
-                "value of sensor2",
-                "value of sensor3"
+                "value of sensor2"
             ]
         )
         for measurement in measurements:
-            writer.writerow(measurement)"""
+            writer.writerow(measurement[0:4]) # check dit
 
 
 # Define a function for user input
@@ -173,10 +176,10 @@ if __name__ == "__main__":
     
     values = read_ADC.values()
     """
-    while not(all(x < 2000 for x in values)):
+    while not(all(x < 1500 for x in values[0:3])):
         time.sleep(1)
         values = read_ADC.values()
-        print(values)
+        print(values[0:3])
     
     print("setting triggers")
     
@@ -198,7 +201,7 @@ if __name__ == "__main__":
     # Flag to signal when to stop reading
     stop_threading = threading.Event()
 
-    rotations = 4
+    rotations = 5
     speed = 1
 
     # Start dispensing thread

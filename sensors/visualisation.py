@@ -64,7 +64,7 @@ def update(frame):
 # Animate
 ani = FuncAnimation(fig, update, interval=1000)
 
-plt.title("Live ADC Readings with Directional Center of Mass Arrow")
+plt.title("Live ADC Readings with Directional Arrow (dot size = ADC value)")
 plt.xlabel("Sensor Position")
-plt.ylabel("Static Position (dot size = ADC value)")
+plt.ylabel("Sensor Position")
 plt.show()
