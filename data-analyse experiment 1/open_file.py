@@ -1,14 +1,13 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-filename = "data-34.csv"
+filename = "data-24.csv"
 open_file = open(f"data/{filename}", 'r')
 
 t = []
 A0 = []
 A1 = []
 A2 = []
-A3 = []
 
 for line in open_file:
     data_opgeknipt = line.split(',')
@@ -18,13 +17,12 @@ for line in open_file:
         A0.append(float(data_opgeknipt[1]))
         A1.append(float(data_opgeknipt[2]))
         A2.append(float(data_opgeknipt[3]))
-        A3.append(float(data_opgeknipt[4]))
     except:
         if data_opgeknipt[0] == "height of setup:":
             height = data_opgeknipt[1]
 open_file.close()
 
-data = np.array([t,A0,A1,A2,A3])
+data = np.array([t,A0,A1,A2])
 
 avg = np.mean(data, axis=1)
 err = np.std(data, axis=1) / np.sqrt(len(data[0]))
@@ -38,5 +36,4 @@ endtime = 300
 plt.plot(t[:endtime], A0[:endtime], color="blue", label="A0")
 plt.plot(t[:endtime], A1[:endtime], color="red", label="A1")
 plt.plot(t[:endtime], A2[:endtime], color="green", label="A2")
-plt.plot(t[:endtime], A3[:endtime], color="black", label="A3")
 plt.show()
