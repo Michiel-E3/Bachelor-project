@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-filename = "data-44.csv"
+filename = "data-38.csv"
 open_file = open(f"data/{filename}", 'r')
 
 t = []

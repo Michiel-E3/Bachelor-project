@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-number_of_files = 76
+number_of_files = 82
 
 data = []
 data_T = [[], [], [], [], [], []]
@@ -60,7 +60,7 @@ plt.ylabel("Max signal strength (AU)")
 plt.show()"""
 
 indices = np.where(np.array(data_all[1]) < 180)[0]
-print(indices)
+# print(indices)
 
 x = np.array(data_all[0])[indices]
 y = np.array(data_all[1])[indices]
@@ -69,7 +69,7 @@ z = np.array(data_all[2])[indices]
 ax = plt.axes(projection='3d')
 # ax.plot_trisurf(x,y,z, cmap='hsv')
 ax.scatter3D(x,y,z, '.', c=z, cmap='hsv') # viridis
-ax.set_xlabel(r'x')
-ax.set_ylabel(r'y')
-ax.set_zlabel(r'z')
+ax.set_xlabel(r'distance (mm)')
+ax.set_ylabel(r'time (s)')
+ax.set_zlabel(r'signal (AU)')
 plt.show()
