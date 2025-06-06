@@ -2,19 +2,19 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-x_offset = 0.075
-x_scale = 0.835
-y_offset = 0.10
-y_scale = 0.885
+x_offset = 0.105
+x_scale = 0.817
+y_offset = 0.137
+y_scale = 0.826
 
 # Load the image (change the filename if needed)
-image_path = "sensor_sensitivity.png"
+image_path = "sensitivity.png"
 img = cv2.imread(image_path)
 img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
 # Extracted ethanol data points (approximate, visually derived)
 ethanol_x = [50, 100, 300, 700, 950, 2000, 5000]  # ppm
-ethanol_y = [3.5, 2, 1.0, 0.6, 0.5, 0.32, 0.185]   # Rs/R0
+ethanol_y = [3.6, 2, 1.0, 0.6, 0.5, 0.31, 0.18]   # Rs/R0
 
 # Convert to log10 for mapping to image scale
 log_x = np.log10(ethanol_x)
