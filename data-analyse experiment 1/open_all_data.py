@@ -14,7 +14,8 @@ for i in range(6, number_of_files+1):
     A1 = []
     A2 = []
     A3 = []
-    open_file = open(f"data/data-{i}.csv", 'r')
+    # open_file = open(f"data/data-{i}.csv", 'r')
+    open_file = open(f"C:/Users/Michiel Erkamp/Desktop/Bachelor-project/data experiment 1/data-{i}.csv", 'r')
     for line in open_file:
         data_opgeknipt = line.split(',')
         try:
@@ -71,7 +72,8 @@ z = data_all[6]
 ax = plt.axes(projection='3d')
 # ax.plot_trisurf(x,y,z, cmap='hsv')
 ax.scatter3D(x,y,z, '.', c=z, cmap='hsv') # viridis
-ax.set_xlabel(r'x')
-ax.set_ylabel(r'y')
-ax.set_zlabel(r'z')
+ax.view_init(elev=30, azim=-30)
+ax.set_xlabel(r'Height (mm)')
+ax.set_ylabel(r'Time (s)')
+ax.set_zlabel(r'Signal strength (AU)')
 plt.show()

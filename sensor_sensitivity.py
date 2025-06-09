@@ -32,7 +32,7 @@ plt.figure(figsize=(6, 5))
 plt.imshow(img_rgb)
 
 # Plot the ethanol line
-plt.plot(x_pixels, y_pixels, color='orange', marker='o', linewidth=2, label='Ethanol (extracted)')
+plt.plot(x_pixels, y_pixels, color='orange', linewidth=2, label='Ethanol (extracted)')
 
 # Overlay log-log grid lines
 # Define log scale ticks from 10^1 to 10^4 for x, and 10^-1 to 10^2 for y
@@ -50,7 +50,5 @@ for yt in y_ticks:
     plt.axhline(y=y_pos, color='gray', linestyle='--', linewidth=0.8)
 
 plt.axis('off')
-plt.title("Overlay with Gridlines for Verification")
-plt.legend()
 plt.tight_layout()
 plt.show()
