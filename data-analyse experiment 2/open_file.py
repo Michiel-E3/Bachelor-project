@@ -34,7 +34,7 @@ print(f"height = {height}")
 endtime = 300
 
 plt.plot(t[:endtime], A0[:endtime], color="blue", label="A0")
-# plt.plot(t[:endtime], A1[:endtime], color="red", label="A1")
-# plt.plot(t[:endtime], A2[:endtime], color="green", label="A2")
+plt.plot(t[:endtime], A1[:endtime], color="red", label="A1")
+plt.plot(t[:endtime], A2[:endtime], color="green", label="A2")
 plt.xlim(0,300)
 plt.show()
