@@ -1,27 +1,12 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-######################################################
-# This cannot be changed:
-threshold = np.linspace(1000, 3000, 3)
-distance = np.linspace(0, 4, 5)
-data = np.ndarray((3,5))
+index_left = [1,2,3,5,4,5,6,7]
 
-for i, value in enumerate(threshold):
-    for j, x in enumerate(distance):
-        data[i,j] = np.random.random()*x # is a time
+# select last continuous sequence
+diffs = np.diff(index_left)
+split_index = np.where(diffs != 1)[0]
+start = split_index[-1] + 1 if len(split_index) > 0 else 0
+index_left = index_left[start:]
 
-print(data)
-#######################################################
-# Change this:
-
-data = np.array(data).T  # Transpose to shape (5, 3)
-
-X, Y = np.meshgrid(threshold, distance)
-
-fig, ax = plt.subplots()
-ax.set_title('Heatmap')
-c = ax.pcolormesh(X, Y, data, cmap='inferno', shading='auto')  # shading='auto' avoids warnings
-
-fig.colorbar(c, ax=ax, label="Time")
-plt.show()
+print(index_left)
